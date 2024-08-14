@@ -1,0 +1,11 @@
+{
+  "name": "react-session.manager.sk",
+  "version": "1.0.0",
+  "description": "A react component used to manage token sessions with flask backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Skulldorom",
+  "license": "ISC"
+}
