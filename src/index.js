@@ -173,8 +173,11 @@ const SessionManagerProvider = ({
               }, 1000 * reloads);
             } else {
               toast.warning(
-                "The application needs to be updated pleaese wait for some time then reload the page.",
-                { toastId: "appReloadError", icon: customeUpdateIcon }
+                "The application needs to be updated please wait for some time then reload the page.",
+                {
+                  toastId: "appReloadError",
+                  ...(customeUpdateIcon && { icon: customeUpdateIcon }),
+                }
               );
             }
           }
@@ -243,13 +246,13 @@ const SessionManagerProvider = ({
 
   return (
     <SessionManager.Provider value={contextValue}>
-      <VersionProtection />
+      <VersionProtection appVersion={appVersion} />
       {children}
     </SessionManager.Provider>
   );
 };
 
-function VersionProtection() {
+function VersionProtection(appVersion) {
   const oldVersion = sessionStorage.getItem("appVersionOld") || false;
 
   useEffect(() => {
