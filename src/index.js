@@ -19,11 +19,11 @@ export const SessionManager = createContext({
 });
 
 const SessionManagerProvider = ({
+  baseUrl,
   refreshTimer,
   dataRefresh,
   userLoader,
   refreshToken,
-  AuthenticatedAxiosObject,
   customeUpdateIcon,
   appVersion,
   children,
@@ -242,6 +242,7 @@ const SessionManagerProvider = ({
     hasRole: hasRole,
     deviceUID: deviceUID,
     loadingUser: loadingUser,
+    axiosAuth: AuthenticatedAxiosObject,
   };
 
   return (
