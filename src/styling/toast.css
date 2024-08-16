@@ -1,0 +1,56 @@
+:root {
+  --main: #303030;
+  --themec: #303030;
+  --default: #303030;
+  --contrastText: "rgba(0, 0, 0, 0.87)";
+}
+
+.custToast {
+  background: var(--themec);
+}
+.custToast .Toastify__close-button {
+  color: var(--main);
+}
+
+.custToast.Toastify__toast--success {
+  color: var(--success);
+}
+.custToast.Toastify__toast--info {
+  color: var(--info);
+}
+.custToast.Toastify__toast--warning {
+  color: var(--warning);
+}
+.custToast.Toastify__toast--error {
+  color: var(--error);
+}
+
+.custToast .Toastify__progress-bar--success {
+  background: var(--success);
+}
+.custToast .Toastify__progress-bar--info {
+  background: var(--info);
+}
+.custToast .Toastify__progress-bar--warning {
+  background: var(--warning);
+}
+.custToast .Toastify__progress-bar--error {
+  background: var(--error);
+}
+
+.custToast.materialToast.Toastify__toast--success {
+  background: var(--success);
+  color: var(--contrastText);
+}
+.custToast.materialToast.Toastify__toast--info {
+  background: var(--info);
+  color: var(--contrastText);
+}
+.custToast.materialToast.Toastify__toast--warning {
+  background: var(--warning);
+  color: var(--contrastText);
+}
+.custToast.materialToast.Toastify__toast--error {
+  background: var(--error);
+  color: var(--contrastText);
+}

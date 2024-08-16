@@ -2,7 +2,9 @@ import React, { createContext, useState, useEffect, useCallback } from "react";
 import versionCompare from "./components/versionCompare";
 import getDeviceFingerprint from "./components/FingerPrint";
 // Notifications
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./styling/toast.css";
 
 export const SessionManager = createContext({
   isLoggedIn: null,
@@ -19,13 +21,14 @@ export const SessionManager = createContext({
 });
 
 const SessionManagerProvider = ({
-  baseUrl,
+  AuthenticatedAxiosObject,
   refreshTimer,
   dataRefresh,
   userLoader,
   refreshToken,
   customeUpdateIcon,
   appVersion,
+  toastOptions,
   children,
 }) => {
   // Set deivce UID
@@ -194,7 +197,7 @@ const SessionManagerProvider = ({
       );
     };
     return customInterceptor;
-  });
+  }, [AuthenticatedAxiosObject, currentLoggin, customeUpdateIcon]);
 
   // We will use the below to refresh our data about the user when ever we flag refreshData as true
   const [refreshData, setRefreshFlag] = useState(false);
@@ -242,11 +245,19 @@ const SessionManagerProvider = ({
     hasRole: hasRole,
     deviceUID: deviceUID,
     loadingUser: loadingUser,
-    axiosAuth: AuthenticatedAxiosObject,
   };
 
   return (
     <SessionManager.Provider value={contextValue}>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        toastClassName={"custToast materialToast"}
+        {...toastOptions}
+      />
       <VersionProtection appVersion={appVersion} />
       {children}
     </SessionManager.Provider>
@@ -255,7 +266,6 @@ const SessionManagerProvider = ({
 
 function VersionProtection(appVersion) {
   const oldVersion = sessionStorage.getItem("appVersionOld") || false;
-
   useEffect(() => {
     if (
       oldVersion &&
