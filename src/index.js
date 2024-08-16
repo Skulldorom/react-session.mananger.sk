@@ -268,7 +268,7 @@ const SessionManagerProvider = ({
   );
 };
 
-function VersionProtection(appVersion) {
+function VersionProtection({ appVersion }) {
   const oldVersion = sessionStorage.getItem("appVersionOld") || false;
   useEffect(() => {
     if (
@@ -276,13 +276,16 @@ function VersionProtection(appVersion) {
       sessionStorage.getItem("requiredVersion") &&
       versionCompare(appVersion, sessionStorage.getItem("requiredVersion"))
     ) {
+      console.log("Update Success Toast");
       toast.success("Your application has been updated", {
         toastId: "appReload",
-        icon: <BrownserUpdated />,
+        icon: <BrowserUpdated />,
+        onClose: () => {
+          sessionStorage.removeItem("appVersionOld");
+          sessionStorage.removeItem("requiredVersion");
+          sessionStorage.removeItem("appReloads");
+        },
       });
-      sessionStorage.removeItem("appVersionOld");
-      sessionStorage.removeItem("requiredVersion");
-      sessionStorage.removeItem("appReloads");
     }
   }, [oldVersion]);
 

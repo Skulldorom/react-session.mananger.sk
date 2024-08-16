@@ -5,7 +5,7 @@ This is used in conjunction with a custom flask app in order to manage user sess
 ## Installation
 
 ```
-npm install react-session-manager-sk
+npm install react-session.manager.sk
 ```
 
 ## Usage
