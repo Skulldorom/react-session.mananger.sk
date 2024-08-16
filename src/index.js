@@ -148,7 +148,8 @@ const SessionManagerProvider = ({
           if (error?.response?.status === 455) {
             try {
               const status = error.response.data.logged_in || false;
-              if (currentLoggin && !status) {
+              if (!status) {
+                console.log("Session ended");
                 setCurrentLoggedIn(false);
                 AuthenticatedAxiosObject.defaults.headers.common[
                   "Authorization"
@@ -255,6 +256,7 @@ const SessionManagerProvider = ({
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
+        newestOnTop={false}
         toastClassName={"custToast materialToast"}
         {...toastOptions}
       />

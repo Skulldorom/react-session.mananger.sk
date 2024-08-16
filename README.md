@@ -39,23 +39,17 @@ npm install react-session-manager-sk
 Link react and react-dom to the project you want to test with.
 
 ```
-
 cd node_modules/react
 npm link
-
 ```
 
 ```
-
 cd node_modules/react-dom
 npm link
-
 ```
 
 Run the following in package root directory
 
 ```
-
 npm link react react-dom
-
 ```
