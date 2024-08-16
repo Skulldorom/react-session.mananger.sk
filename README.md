@@ -17,7 +17,6 @@ npm install react-session-manager-sk
     AuthenticatedAxiosObject={axiosAuth} // axios object with token
     refreshTimer={config.server.tokenRefreshTimer} // time to refresh token
     dataRefresh={config.server.dataRefreshTimer} // time to refresh data
-    customeUpdateIcon={<Update />} // custom icon for update
     appVersion={config.appVersion} // app version
     toastOptions={{
     icon: true,

@@ -6,6 +6,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styling/toast.css";
 
+// Icons
+import { GppBad, Update, BrowserUpdated, Logout } from "@mui/icons-material";
+
 export const SessionManager = createContext({
   isLoggedIn: null,
   header: null,
@@ -26,7 +29,6 @@ const SessionManagerProvider = ({
   dataRefresh,
   userLoader,
   refreshToken,
-  customeUpdateIcon,
   appVersion,
   toastOptions,
   children,
@@ -156,7 +158,7 @@ const SessionManagerProvider = ({
                 ] = ``;
                 toast.info(
                   "Your session in no longer valid, please login again.",
-                  { toastId: "Forced_log_out" }
+                  { toastId: "Forced_log_out", icon: <Logout /> }
                 );
               }
             } catch (err) {
@@ -180,7 +182,7 @@ const SessionManagerProvider = ({
                 "The application needs to be updated please wait for some time then reload the page.",
                 {
                   toastId: "appReloadError",
-                  ...(customeUpdateIcon && { icon: customeUpdateIcon }),
+                  icon: <Update />,
                 }
               );
             }
@@ -190,7 +192,7 @@ const SessionManagerProvider = ({
             if (error?.code !== "ERR_CANCELED" && error?.message !== "canceled")
               toast.error(
                 "The server is not responding, please reload or try again later.",
-                { toastId: "ERR_CONNECTION_REFUSED" }
+                { toastId: "ERR_CONNECTION_REFUSED", icon: <GppBad /> }
               );
           }
           throw error;
@@ -198,7 +200,7 @@ const SessionManagerProvider = ({
       );
     };
     return customInterceptor;
-  }, [AuthenticatedAxiosObject, currentLoggin, customeUpdateIcon]);
+  }, [AuthenticatedAxiosObject, currentLoggin]);
 
   // We will use the below to refresh our data about the user when ever we flag refreshData as true
   const [refreshData, setRefreshFlag] = useState(false);
@@ -276,6 +278,7 @@ function VersionProtection(appVersion) {
     ) {
       toast.success("Your application has been updated", {
         toastId: "appReload",
+        icon: <BrownserUpdated />,
       });
       sessionStorage.removeItem("appVersionOld");
       sessionStorage.removeItem("requiredVersion");
